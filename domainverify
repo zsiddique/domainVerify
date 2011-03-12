@@ -4,15 +4,33 @@
 
 function openDomain()
 {
+	local FD1=7
+	local file1=$1
+	local data1
 	
+	BAKIFS=$IFS
+	IFS=$(echo -en "\n\b")
+	eval exec "$FD1<$file1"
+	
+	while read data1 <&$FD1
+	do
+		vhost=/var/www/vhost/$(echo $data1)
+	done
+	
+	exec 0<&7
+	IFS=$BAKIFS
 }
 
-function comparevHost()
-{
-	
-}
+#function comparevHost()
+##{
 
-function compareMail()
-{
+##}
+
+##function compareMail()
+##{
 	
-}
+##}
+
+openDomain $1
+
+echo "$vhost"
