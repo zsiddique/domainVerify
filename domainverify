@@ -34,3 +34,5 @@ function openDomain()
 openDomain $1
 
 echo "$vhost"
+
+1>output
